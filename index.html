@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github Access Token Generator</title>
+    
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="Generate GitHub access tokens with selected scopes">
+    <meta name="keywords" content="GitHub, access token, generator, scopes">
+    <meta name="author" content="sh20raj">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="./og.png">
+    <meta property="og:title" content="GitHub Access Token Generator">
+    <meta property="og:description" content="Generate GitHub access tokens with selected scopes">
+    <meta property="og:image" content="./og.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://github-access-token-generator.vercel.app/">
+    <meta property="twitter:title" content="GitHub Access Token Generator">
+    <meta property="twitter:description" content="Generate GitHub access tokens with selected scopes">
+    <meta property="twitter:image" content="./og.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="icon.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .container {
+            text-align: center;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+        }
+        
+        .button {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .scopes {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .scope {
+            margin: 5px;
+        }
+        #token {
+            user-select: all;
+            font-weight: bold;
+        }
+        footer {
+            display: block;
+            bottom: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>GitHub Access Token Generator</h1>
+        <div id="accesstoken">Your GitHub Personal Access Token is {{access_token}}.</div>
+        <p>Select the scopes you need access to:</p>
+        <label><input type="checkbox" id="selectAll"> Select All</label>
+
+        <form id="scopesForm" class="scopes">
+            <br>
+            <label class="scope"><input type="checkbox" name="scope" value="repo"> Repo</label>
+            <label class="scope"><input type="checkbox" name="scope" value="repo_deployment"> Repo Deployment</label>
+            <label class="scope"><input type="checkbox" name="scope" value="repo:status"> Repo Status</label>
+            <label class="scope"><input type="checkbox" name="scope" value="public_repo"> Public Repo</label>
+            <label class="scope"><input type="checkbox" name="scope" value="repo:invite"> Repo Invitation</label>
+            <label class="scope"><input type="checkbox" name="scope" value="security_events"> Security Events</label>
+            <label class="scope"><input type="checkbox" name="scope" value="workflow"> Workflow</label>
+            <label class="scope"><input type="checkbox" name="scope" value="write:packages"> Write Packages</label>
+            <label class="scope"><input type="checkbox" name="scope" value="read:packages"> Read Packages</label>
+            <label class="scope"><input type="checkbox" name="scope" value="delete:packages"> Delete Packages</label>
+            <label class="scope"><input type="checkbox" name="scope" value="admin:org"> Admin Org</label>
+            <label class="scope"><input type="checkbox" name="scope" value="write:org"> Write Org</label>
+            <label class="scope"><input type="checkbox" name="scope" value="read:org"> Read Org</label>
+            <label class="scope"><input type="checkbox" name="scope" value="manage_runners:org"> Manage Runners Org</label>
+            <label class="scope"><input type="checkbox" name="scope" value="admin:public_key"> Admin Public Key</label>
+            <label class="scope"><input type="checkbox" name="scope" value="write:public_key"> Write Public Key</label>
+            <label class="scope"><input type="checkbox" name="scope" value="read:public_key"> Read Public Key</label>
+            <label class="scope"><input type="checkbox" name="scope" value="admin:repo_hook"> Admin Repo Hook</label>
+            <label class="scope"><input type="checkbox" name="scope" value="write:repo_hook"> Write Repo Hook</label>
+            <label class="scope"><input type="checkbox" name="scope" value="read:repo_hook"> Read Repo Hook</label>
+            <label class="scope"><input type="checkbox" name="scope" value="admin:org_hook"> Admin Org Hook</label>
+            <label class="scope"><input type="checkbox" name="scope" value="gist"> Gist</label>
+            <label class="scope"><input type="checkbox" name="scope" value="notifications"> Notifications</label>
+            <label class="scope"><input type="checkbox" name="scope" value="user"> User</label>
+            <label class="scope"><input type="checkbox" name="scope" value="read:user"> Read User</label>
+            <label class="scope"><input type="checkbox" name="scope" value="user:email"> User Email</label>
+            <label class="scope"><input type="checkbox" name="scope" value="user:follow"> User Follow</label>
+            <label class="scope"><input type="checkbox" name="scope" value="delete_repo"> Delete Repo</label>
+            <label class="scope"><input type="checkbox" name="scope" value="write:discussion"> Write Discussion</label>
+            <label class="scope"><input type="checkbox" name="scope" value="read:discussion"> Read Discussion</label>
+            <label class="scope"><input type="checkbox" name="scope" value="admin:enterprise"> Admin Enterprise</label>
+            <label class="scope"><input type="checkbox" name="scope" value="manage_runners:enterprise"> Manage Runners Enterprise</label>
+            <label class="scope"><input type="checkbox" name="scope" value="manage_billing:enterprise"> Manage Billing Enterprise</label>
+            <label class="scope"><input type="checkbox" name="scope" value="read:enterprise"> Read Enterprise</label>
+            <label class="scope"><input type="checkbox" name="scope" value="audit_log"> Audit Log</label>
+            <label class="scope"><input type="checkbox" name="scope" value="read:audit_log"> Read Audit Log</label>
+            <label class="scope"><input type="checkbox" name="scope" value="codespace"> Codespace</label>
+            <label class="scope"><input type="checkbox" name="scope" value="codespace:secrets"> Codespace Secrets</label>
+            <label class="scope"><input type="checkbox" name="scope" value="copilot"> Copilot</label>
+            <label class="scope"><input type="checkbox" name="scope" value="manage_billing:copilot"> Manage Billing Copilot</label>
+            <label class="scope"><input type="checkbox" name="scope" value="project"> Project</label>
+            <label class="scope"><input type="checkbox" name="scope" value="read:project"> Read Project</label>
+            <label class="scope"><input type="checkbox" name="scope" value="admin:gpg_key"> Admin GPG Key</label>
+            <label class="scope"><input type="checkbox" name="scope" value="write:gpg_key"> Write GPG Key</label>
+            <label class="scope"><input type="checkbox" name="scope" value="read:gpg_key"> Read GPG Key</label>
+            <label class="scope"><input type="checkbox" name="scope" value="admin:ssh_signing_key"> Admin SSH Signing Key</label>
+            <label class="scope"><input type="checkbox" name="scope" value="write:ssh_signing_key"> Write SSH Signing Key</label>
+            <label class="scope"><input type="checkbox" name="scope" value="read:ssh_signing_key"> Read SSH Signing Key</label>
+        </form>
+        <button class="button" onclick="loginWithGitHub()">Login with GitHub</button>
+
+
+        <footer>
+            <p><em>Note that this token has the same permissions as your user account. If you don't trust it, please revoke it immediately!</em></p>
+        <p><em>Note that this token has the same permissions as your user account. If you don't trust it, revoke access at https://github.com/settings/
+        <br />
+        <p>This page allows you to generate a personal access token for your GitHub account. Please follow the instructions below carefully, as incorrect or incomplete information may lead to an invalid token.</p>
+        &copy;<a href="https://sopkit.github.io/" target="_blank"> SopKit </a><br>
+        </footer>
+    </div>
+
+    <script>
+
+        let query = new URL(window.location).searchParams;
+        let token = query.get("token")
+        if (token) {
+
+          document.getElementById('accesstoken').innerHTML = 'Your GitHub Personal Access Token is <span id="token">'+ token +'</span>.';
+          localStorage.accessToken = token;
+          localStorage.time = Date();
+
+          
+
+          window.location.href = "/";
+        }
+        (localStorage.accessToken)?
+        document.getElementById('accesstoken').innerHTML = 'Your GitHub Personal Access Token is <span onclick="copyToClipboard()" id="token">'+ localStorage.accessToken +'</span>.<br> <i>Recently Generated ('+localStorage.time+')</i>':null;
+
+
+        function loginWithGitHub() {
+            const selectedScopes = Array.from(document.querySelectorAll('input[name="scope"]:checked')).map(scope => scope.value);
+            const scopesQueryString = selectedScopes.length > 0 ? `?scopes=${selectedScopes.join(',')}` : '';
+            window.location.href = `/auth/github${scopesQueryString}`;
+        }
+
+
+        document.getElementById('selectAll').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('input[name="scope"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+        });
+        function copyToClipboard() {
+            const textToCopy = localStorage.accessToken;
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => alert('Token copied to clipboard!'))
+                .catch(() => alert('Failed to copy token to clipboard!'));
+        }
+    </script>
+</body>
+</html>
