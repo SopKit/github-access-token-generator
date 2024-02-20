@@ -173,7 +173,7 @@
         function loginWithGitHub() {
             const selectedScopes = Array.from(document.querySelectorAll('input[name="scope"]:checked')).map(scope => scope.value);
             const scopesQueryString = selectedScopes.length > 0 ? `?scopes=${selectedScopes.join(',')}` : '';
-            window.location.href = `/auth/github${scopesQueryString}`;
+            window.location.href = `https://github-access-token-generator.vercel.app/auth/github${scopesQueryString}`;
         }
 
 
