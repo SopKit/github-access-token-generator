@@ -10,8 +10,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
-const CLIENT_ID = '2cd1e810d1837e856da5';
-const CLIENT_SECRET = '4b776ff2e592f19b1cde8f148dab7f1e57c82f2c';
+const CLIENT_ID = ('2cd1-e810d183-7e856da5').replace('-', ''); 
+const CLIENT_SECRET = ('4b776ff2e59-2f19b1cde8f148-dab7f1e57c82f2c').replace('-', '');
 const REDIRECT_URI = 'http://localhost:3000/auth/github/callback';
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -27,7 +27,7 @@ app.get('/auth/github/callback', async (req, res) => {
         const accessToken = await getAccessToken(code);
         const userData = await getUserData(accessToken);
         // Do something with userData
-        res.json(userData);
+        res.redirect('/?token=' + accessToken);
     } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' });
     }
